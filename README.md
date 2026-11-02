@@ -4,14 +4,14 @@ A Linux server monitoring stack using Prometheus, Grafana, Node Exporter, and Do
 
 ## Project Overview
 
-This project monitors Linux system metrics using a containerized monitoring stack.
+This project monitors Linux system metrics using a containerized monitoring stack. It collects and visualizes CPU, memory, disk, and network metrics through Prometheus and Grafana.
 
 ## Architecture
 
 The project consists of three services:
 
 - **Prometheus:** Collects and stores monitoring metrics.
-- **Node Exporter:** Exposes Linux system metrics such as CPU, memory, and disk usage.
+- **Node Exporter:** Exposes Linux system metrics such as CPU, memory, disk, and network usage.
 - **Grafana:** Visualizes metrics through dashboards.
 
 Docker Compose manages all services.
@@ -57,18 +57,44 @@ docker compose ps
 - Grafana: http://localhost:3000
 - Node Exporter: http://localhost:9100/metrics
 
+## Prometheus Verification
+
+Open the Prometheus Targets page:
+
+```text
+http://localhost:9090/targets
+```
+
+Make sure both Prometheus and Node Exporter targets are **UP**.
+
+You can also run the following PromQL queries:
+
+```promql
+up
+```
+
+```promql
+node_cpu_seconds_total
+```
+
+```promql
+node_memory_MemAvailable_bytes
+```
+
 ## Grafana Setup
 
 Log in to Grafana using the initial credentials:
 
-- Username: admin
-- Password: admin
+- Username: `admin`
+- Password: `admin`
 
-Then add Prometheus as a data source using:
+Add Prometheus as a data source using:
 
 ```text
 http://prometheus:9090
 ```
+
+Import the **Node Exporter Full** dashboard using Dashboard ID `1860`.
 
 ## Data Persistence
 
